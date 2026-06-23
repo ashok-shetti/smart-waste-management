@@ -22,7 +22,7 @@ The project requires the following software to be installed:
 
 2. Open **PowerShell** or **Command Prompt** and navigate to your project directory:
    ```powershell
-   cd d:\projects\smart-waste-management-system
+   cd d:\projects\smart-waste-management
    ```
 
 3. Create a Python Virtual Environment (`venv`) to isolate project dependencies:

@@ -9,7 +9,7 @@ This guide outlines the procedures for testing each component of the **Smart Was
 1. Open PowerShell or Command Prompt.
 2. Navigate to the project directory:
    ```powershell
-   cd d:\projects\smart-waste-management-system
+   cd d:\projects\smart-waste-management
    ```
 3. Activate your virtual environment if not already active:
    * **On PowerShell**:
@@ -27,14 +27,14 @@ This guide outlines the procedures for testing each component of the **Smart Was
    ```
 4. **Expected Output:**
    - The simulator will connect to the local broker.
-   - It will print a listing of all 5 bins with their cities and GPS coordinates.
+   - It will print a listing of all 5 bins with their locations and GPS coordinates.
    - Every 5 seconds, it will display a new cycle.
    - It will show each bin's fill level increasing and the published JSON data:
      ```text
      [SYSTEM] Connected successfully to MQTT Broker at localhost:1883
      --------------------------------------------------------------------------------
      --- [Cycle #1] Generating & Publishing Data ---
-      * BIN001 (Pune): Fill Level increased to 22% (+12%)
+      * BIN001 (Pune (Kothrud)): Fill Level increased to 22% (+12%)
         Published to waste/bin/data: {"bin_id": "BIN001", "fill_level": 22, "weight": 11, ...}
      ```
 
@@ -53,11 +53,11 @@ The Node-RED flow automatically writes incoming MQTT messages to `waste_manageme
 4. **Expected Output:**
    You should see 5 printed tuples corresponding to the latest records logged by Node-RED, for example:
    ```text
-   (25, 'BIN005', 42, 22, 13.0827, 80.2707, '2026-06-23 10:15:32', 'Normal')
-   (24, 'BIN004', 58, 31, 28.7041, 77.1025, '2026-06-23 10:15:32', 'Warning')
-   (23, 'BIN003', 89, 47, 12.9716, 77.5946, '2026-06-23 10:15:32', 'Critical')
-   (22, 'BIN002', 31, 16, 19.0760, 72.8777, '2026-06-23 10:15:32', 'Normal')
-   (21, 'BIN001', 19, 10, 18.5204, 73.8567, '2026-06-23 10:15:32', 'Normal')
+   (25, 'BIN005', 42, 22, 18.5089, 73.9260, '2026-06-23 10:15:32', 'Normal')
+   (24, 'BIN004', 58, 31, 18.5679, 73.9143, '2026-06-23 10:15:32', 'Warning')
+   (23, 'BIN003', 89, 47, 18.5314, 73.8446, '2026-06-23 10:15:32', 'Critical')
+   (22, 'BIN002', 31, 16, 18.5362, 73.8940, '2026-06-23 10:15:32', 'Normal')
+   (21, 'BIN001', 19, 10, 18.5074, 73.8077, '2026-06-23 10:15:32', 'Normal')
    ```
 
 ---
@@ -78,8 +78,8 @@ The Node-RED flow automatically writes incoming MQTT messages to `waste_manageme
 - The values must update automatically in place every 5 seconds.
 
 ### Page 3: Bin Locations Map
-- You should see an interactive map centered over India.
-- Five pins should be visible at Pune, Mumbai, Bengaluru, Delhi, and Chennai.
+- You should see an interactive map centered over Pune.
+- Five pins should be visible at Kothrud, Koregaon Park, Shivajinagar, Viman Nagar, and Hadapsar in Pune.
 - The pins will dynamically change color: **Green** (Normal, 0-50%), **Orange** (Warning, 51-80%), or **Red** (Critical, 81-100%).
 - Click on any marker. A popup should open displaying the Bin ID, current fill level, weight, and status.
 
@@ -98,11 +98,11 @@ To verify the alert toasts and simulated collections:
 2. Monitor the simulator console. Eventually, one or more bins will accumulate enough waste to exceed `85%` (e.g., rising from `65%` -> `80%` -> `92%`).
 3. **Check the Dashboard:**
    - As soon as a bin exceeds `80%` fill level, a red toast alert should pop up in the top-right corner of the dashboard screen:
-     `ALERT: BIN003 (Bengaluru) is Full at 92%!`.
+     `ALERT: BIN003 (Pune (Shivajinagar)) is Full at 92%!`.
    - The marker for that bin on the map page should turn **Red**.
    - The status in the table should change to **Critical**.
 4. **Simulate Collection:**
    - Keep watching the simulator console. The bin will remain at its high fill level for 1 or 2 cycles (e.g., displaying `WAITING COLLECTION (Level: 92%)`).
    - On the next cycle, you should see the collection log in the console:
-     `[TRUCK COLLECTED] Emptying BIN003 in Bengaluru. Level reset to 4%`
+     `[TRUCK COLLECTED] Emptying BIN003 in Pune (Shivajinagar). Level reset to 4%`
    - On the dashboard, the toast alert will disappear, the map marker will return to **Green**, and the charts will show a sharp drop down to the low value, confirming that the simulated collection was successfully logged.

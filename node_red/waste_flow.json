@@ -161,7 +161,7 @@
     {
         "id": "sqlite_db_config",
         "type": "sqlitedb",
-        "db": "d:\\projects\\smart-waste-management-system\\waste_management.db",
+        "db": "d:\\projects\\smart-waste-management\\waste_management.db",
         "mode": "RWC"
     },
     {

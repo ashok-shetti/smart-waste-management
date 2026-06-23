@@ -56,7 +56,7 @@ graph TD
     subgraph "Dashboard Visualization"
         Dash_Over[Page 1: Overview Cards]
         Dash_Table[Page 2: Telemetry Table]
-        Dash_Map[Page 3: Live India Map]
+        Dash_Map[Page 3: Live Pune Map]
         Dash_Chart[Page 4: Trend Charts]
         Alert_Toast[Toast Alert Pop-up]
     end
@@ -77,7 +77,7 @@ graph TD
 ---
 
 ## 🗺️ Monitored Bins Configuration
-The system simulates 5 distinct garbage bins at fixed geographical positions in India:
+The system simulates 5 distinct garbage bins at fixed geographical positions in Pune:
 
 | Bin ID | Location | Latitude | Longitude |
 | :--- | :--- | :--- | :--- |
@@ -105,7 +105,7 @@ For detailed setup procedures covering Python, Mosquitto MQTT Broker, and Node-R
    - `node-red-contrib-web-worldmap`
    - `node-red-node-sqlite`
 3. **Import Flow File**:
-   Copy the contents of [node_red_flow.json](./node_red/node_red_flow.json) and import them into Node-RED (*Menu -> Import*). Click **Deploy** to start processing the flow.
+   Copy the contents of [waste_flow.json](./node_red/waste_flow.json) and import them into Node-RED (*Menu -> Import*). Click **Deploy** to start processing the flow.
 
 ---
 
