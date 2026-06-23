@@ -1,31 +1,36 @@
 # Smart Waste Management System
 
-A beginner-friendly Smart Waste Management System that simulates IoT-enabled waste bins, processes telemetry data using MQTT and Node-RED, stores records in SQLite, and visualizes real-time waste monitoring data through an interactive dashboard.
+Smart Waste Management System is an IoT-based monitoring solution that simulates waste bins, processes telemetry data using MQTT and Node-RED, stores records in SQLite, and visualizes real-time information through an interactive dashboard.
 
-This project is developed as a SWAYAM IoT Course Project. It serves as an IoT monitoring project, MQTT communication project, real-time dashboard project, and data collection and monitoring system.
+The system monitors garbage bin fill levels, weight, and geographical locations in real time. It generates alerts when bins reach critical capacity and provides centralized monitoring through a web dashboard.
 
 ---
 
 ## 📌 Project Overview
-Metropolitan cities face huge challenges in monitoring garbage bins manually. Bins that are left overflowing create severe hygiene issues, unpleasant odor, and high operational costs due to inefficient truck routing.
+The accumulation of solid waste in urban environments requires efficient monitoring to optimize collection cycles and maintain public hygiene. 
 
-The **Smart Waste Management System** digitizes this process. It monitors fill levels, weight, and geographical coordinates of 5 separate garbage bins in real time. Whenever a bin's fill level exceeds a critical threshold (80%), the system raises a toast notification on the dashboard and indicates the status visually. It also logs every packet to an SQLite database for history tracking and trends plotting.
+This system provides:
+* **Real-Time Visibility**: Monitored tracking of fill levels, weight, and operational status across multiple waste bins.
+* **Alert Generation**: Automatic, instant threshold alerts (toast notifications) when any bin exceeds 80% capacity.
+* **Location Tracking**: Interactive mapping of bins with coordinates and color-coded markers indicating real-time status.
+* **Data Storage**: Localized, structured telemetry history logging to an SQLite database.
+* **Dashboard Visualization**: A clean, centralized web interface offering system statistics, live tables, and trends.
 
 ---
 
 ## ⚙️ Technology Stack
 
 * **Programming Language:** Python 3.x
-* **IoT Protocols:** MQTT Protocol
+* **IoT Protocol:** MQTT (Message Queuing Telemetry Transport)
 * **MQTT Broker:** Mosquitto MQTT Broker (Running locally)
 * **Flow Creator & Routing:** Node-RED
 * **Visualization Dashboard:** Node-RED Dashboard (`node-red-dashboard`)
 * **Interactive Maps:** Node-RED Worldmap (`node-red-contrib-web-worldmap`)
-* **Database Engine:** SQLite (File-based database, no installation needed)
+* **Database Engine:** SQLite (File-based relational database)
 
 ---
 
-## 🌐 Project Architecture
+## 🌐 System Architecture
 
 ```mermaid
 graph TD
@@ -71,94 +76,91 @@ graph TD
 
 ---
 
-## 🗺️ Fixed Garbage Bin Locations
-The system monitors 5 bins placed at fixed geographical coordinates:
+## 🗺️ Monitored Bins Configuration
+The system simulates 5 distinct garbage bins at fixed geographical positions in India:
 
-| Bin ID | City | Latitude | Longitude |
+| Bin ID | Location | Latitude | Longitude |
 | :--- | :--- | :--- | :--- |
-| **BIN001** | Pune | 18.5204 | 73.8567 |
-| **BIN002** | Mumbai | 19.0760 | 72.8777 |
-| **BIN003** | Bengaluru | 12.9716 | 77.5946 |
-| **BIN004** | Delhi | 28.7041 | 77.1025 |
-| **BIN005** | Chennai | 13.0827 | 80.2707 |
+| **BIN001** | Pune (Kothrud) | 18.5074 | 73.8077 |
+| **BIN002** | Pune (Koregaon Park) | 18.5362 | 73.8940 |
+| **BIN003** | Pune (Shivajinagar) | 18.5314 | 73.8446 |
+| **BIN004** | Pune (Viman Nagar) | 18.5679 | 73.9143 |
+| **BIN005** | Pune (Hadapsar) | 18.5089 | 73.9260 |
 
 ---
 
-## 🚀 Installation and Setup
+## 🚀 Setup and Installation
 
-For detailed step-by-step setup of Python, Mosquitto MQTT Broker, and Node-RED, refer to the [Installation Guide](file:///d:/projects/smart-waste-management/docs/installation_guide.md).
+For detailed setup procedures covering Python, Mosquitto MQTT Broker, and Node-RED configuration, please refer to the [Installation Guide](./docs/installation_guide.md).
 
-### Quick Setup
+### Quick Start
 
-1. **Python Dependencies**:
+1. **Install Python Dependencies**:
    ```powershell
    pip install -r requirements.txt
    ```
-2. **Node-RED Palette**:
-   Install `node-red-dashboard`, `node-red-contrib-web-worldmap`, and `node-red-node-sqlite` via the Node-RED Palette Manager.
-3. **Import Flow**:
-   Import [node_red_flow.json](file:///d:/projects/smart-waste-management/node_red/node_red_flow.json) in your Node-RED editor and click **Deploy**.
+2. **Install Node-RED Nodes**:
+   Add the following packages via your Node-RED Palette Manager (*Menu -> Manage palette -> Install*):
+   - `node-red-dashboard`
+   - `node-red-contrib-web-worldmap`
+   - `node-red-node-sqlite`
+3. **Import Flow File**:
+   Copy the contents of [node_red_flow.json](./node_red/node_red_flow.json) and import them into Node-RED (*Menu -> Import*). Click **Deploy** to start processing the flow.
 
 ---
 
 ## 🏃 Running Instructions
 
-1. **Start the MQTT Broker** (Verify port 1883 is listening).
-2. **Start Node-RED** and verify the flow is deployed.
-3. **Run the Simulator**:
+1. **Verify Services**: Ensure that the Mosquitto MQTT Broker is running locally on port `1883`.
+2. **Start Node-RED**: Open a terminal and run:
    ```bash
+   node-red
+   ```
+3. **Launch the Simulator**:
+   ```powershell
    python simulator/bin_simulator.py
    ```
-4. **Open the Dashboard**:
-   Go to `http://localhost:1880/ui/` in your browser.
+4. **Access the Interface**: Open your browser and navigate to:
+   ```text
+   http://localhost:1880/ui/
+   ```
 
 ---
 
-## 📈 Dashboard Explanation
+## 📈 Dashboard Interface
 
-The dashboard has 4 tabbed pages:
+The interactive dashboard is organized into four main telemetry views:
 
-1. **Overview Page:**
-   - **Bin Counts Summary:** Cards showing the number of Bins in Normal, Warning, and Critical states.
-   - **System Statistics:** Live counter showing the "Total Records Logged" and "Last Updated Time" (updates every 5 seconds).
-2. **Bin Monitoring:**
-   - A live, self-updating data table displaying Bin IDs, Fill Levels (%), Weight (kg), and Status (Normal, Warning, Critical) side-by-side.
-3. **Bin Locations Map:**
-   - An interactive map centered on India.
-   - Bins are marked with pins colored by status: **Green** (Normal), **Orange** (Warning), or **Red** (Critical).
-   - Clicking a pin shows real-time stats in a popup.
-4. **Analytics & Trends:**
-   - Two line charts showing the historical rise and fall of Fill Level (%) and Weight (kg) for all 5 bins.
+1. **Overview**: Real-time summary statistics including total records logged, last update timestamp, and the count of bins categorized by current operational state (Normal, Warning, Critical).
+2. **Bin Monitoring**: A live tabular representation listing fill levels, total weights, and active statuses.
+3. **Bin Locations Map**: A spatial overview centered on the monitored area showing interactive pins. Markers are dynamically color-coded: **Green** (Normal, 0-50%), **Orange** (Warning, 51-80%), and **Red** (Critical, 81-100%).
+4. **Analytics & Trends**: Historical line graphs tracking fill levels and weights over runtime cycles for comparative analysis.
 
 ---
 
-## 🖼️ Dashboard Mockup Preview
-A visual representation of the web dashboard in dark mode:
+## 🖼️ Dashboard Preview
+A dark-mode representation of the web dashboard:
 
-![Dashboard Mockup](file:///d:/projects/smart-waste-management/screenshots/dashboard_mockup.svg)
+![Dashboard Mockup](./screenshots/dashboard_mockup.svg)
 
 ---
 
-## 🧪 Testing and Database Verification
+## 🧪 Testing and Verification
 
-Please refer to the [Testing Guide](file:///d:/projects/smart-waste-management/docs/testing_guide.md) to learn how to:
-- Monitor simulator console output.
-- Query SQLite records directly from the command prompt.
-- Confirm dashboard notifications (toasts) when fill level exceeds 80%.
-- Observe simulated garbage collection truck runs.
+To verify database consistency, alert mechanisms, and simulated garbage collection events, refer to the [Testing Guide](./docs/testing_guide.md).
 
 ---
 
 ## ⚙️ Deployment Guide
 
-For instructions on deploying the system components locally and running them as automated background services (such as Mosquitto, Node-RED, and the Python simulator), see the [Deployment Guide](file:///d:/projects/smart-waste-management/docs/deployment_guide.md).
+For instructions on running the system components in production/background mode (e.g., Mosquitto Service, Node-RED with PM2, and running the pythonw background simulator task), refer to the [Deployment Guide](./docs/deployment_guide.md).
 
 ---
 
 ## 🔮 Future Scope
 
 1. Integration with Real Sensors (ESP32 + Ultrasonic Sensors)
-2. Cloud Deployment using IBM Cloud or AWS
+2. Cloud Deployment (AWS / IBM Cloud)
 3. Mobile Notification Support
 4. Multi-City Waste Monitoring
 5. Historical Reporting Dashboard
