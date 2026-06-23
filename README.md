@@ -1,8 +1,8 @@
-# Smart Waste Management System for Metropolitan Cities
+# Smart Waste Management System
 
-A complete, beginner-friendly, and fully functional Smart Waste Management System designed for academic demonstrations, final-year engineering projects, and GitHub portfolios.
+A beginner-friendly Smart Waste Management System that simulates IoT-enabled waste bins, processes telemetry data using MQTT and Node-RED, stores records in SQLite, and visualizes real-time waste monitoring data through an interactive dashboard.
 
-This project simulates garbage bins across metropolitan cities, publishes telemetry data via MQTT, processes it using Node-RED, saves the records to a local SQLite database, and visualizes the telemetry on a real-time web dashboard.
+This project is developed as a SWAYAM IoT Course Project. It serves as an IoT monitoring project, MQTT communication project, real-time dashboard project, and data collection and monitoring system.
 
 ---
 
@@ -86,39 +86,18 @@ The system monitors 5 bins placed at fixed geographical coordinates:
 
 ## 🚀 Installation and Setup
 
-Detailed installation steps are provided in the [Installation Guide](./docs/installation_guide.md). Below is the summary sequence:
+For detailed step-by-step setup of Python, Mosquitto MQTT Broker, and Node-RED, refer to the [Installation Guide](file:///d:/projects/smart-waste-management/docs/installation_guide.md).
 
-### 1. Python Environment Setup
-Create a virtual environment, activate it, and install the dependencies:
-```powershell
-# Navigate to the project directory
-cd d:\projects\smart-waste-management-system
+### Quick Setup
 
-# Create virtual environment
-python -m venv venv
-
-# Activate virtual environment (PowerShell)
-.\venv\Scripts\Activate.ps1
-# OR Activate virtual environment (Command Prompt)
-.\venv\Scripts\activate.bat
-
-# Install dependencies inside the virtual environment
-pip install -r requirements.txt
-```
-
-### 2. Mosquitto Broker Setup
-Download and run the installer from the [Mosquitto Downloads page](https://mosquitto.org/download/). On Windows, it will start automatically as a service.
-
-### 3. Node-RED Configuration
-1. Install Node-RED globally: `npm install -g --unsafe-perm node-red`
-2. Start Node-RED by running `node-red` in your terminal.
-3. Open `http://localhost:1880` in your web browser.
-4. Open the Palette Manager (**Menu -> Manage palette**) and install:
-   - `node-red-dashboard`
-   - `node-red-contrib-web-worldmap`
-   - `node-red-node-sqlite`
-5. Import [waste_flow.json](./node_red/waste_flow.json) (**Menu -> Import**).
-6. Click **Deploy** in the top-right.
+1. **Python Dependencies**:
+   ```powershell
+   pip install -r requirements.txt
+   ```
+2. **Node-RED Palette**:
+   Install `node-red-dashboard`, `node-red-contrib-web-worldmap`, and `node-red-node-sqlite` via the Node-RED Palette Manager.
+3. **Import Flow**:
+   Import [node_red_flow.json](file:///d:/projects/smart-waste-management/node_red/node_red_flow.json) in your Node-RED editor and click **Deploy**.
 
 ---
 
@@ -126,11 +105,11 @@ Download and run the installer from the [Mosquitto Downloads page](https://mosqu
 
 1. **Start the MQTT Broker** (Verify port 1883 is listening).
 2. **Start Node-RED** and verify the flow is deployed.
-3. **Run the Simulator:**
+3. **Run the Simulator**:
    ```bash
    python simulator/bin_simulator.py
    ```
-4. **Open the Dashboard:**
+4. **Open the Dashboard**:
    Go to `http://localhost:1880/ui/` in your browser.
 
 ---
@@ -156,13 +135,13 @@ The dashboard has 4 tabbed pages:
 ## 🖼️ Dashboard Mockup Preview
 A visual representation of the web dashboard in dark mode:
 
-![Dashboard Mockup](./screenshots/dashboard_mockup.svg)
+![Dashboard Mockup](file:///d:/projects/smart-waste-management/screenshots/dashboard_mockup.svg)
 
 ---
 
-## 🧪 Testing and Database Inspection
+## 🧪 Testing and Database Verification
 
-Please refer to the [Testing Guide](./docs/testing_guide.md) to learn how to:
+Please refer to the [Testing Guide](file:///d:/projects/smart-waste-management/docs/testing_guide.md) to learn how to:
 - Monitor simulator console output.
 - Query SQLite records directly from the command prompt.
 - Confirm dashboard notifications (toasts) when fill level exceeds 80%.
@@ -170,15 +149,17 @@ Please refer to the [Testing Guide](./docs/testing_guide.md) to learn how to:
 
 ---
 
-## 🛠️ Deployment and Viva Tips
+## ⚙️ Deployment Guide
 
-For tips on setting up these processes as background tasks and preparing presentation slides/viva scripts for academics, see the [Deployment Guide](./docs/deployment_guide.md).
+For instructions on deploying the system components locally and running them as automated background services (such as Mosquitto, Node-RED, and the Python simulator), see the [Deployment Guide](file:///d:/projects/smart-waste-management/docs/deployment_guide.md).
 
 ---
 
 ## 🔮 Future Scope
-The core architecture is built to be easily expandable. In future iterations, students or developers can implement:
 
-1. **Route Optimization:** Calculate the shortest pathway for garbage collection trucks using the TSP (Traveling Salesperson Problem) algorithm based on GPS coordinates of critical bins.
-2. **Predictive Maintenance:** Forecast when a bin will become full based on historical fill rates using linear regression models.
-3. **Waste Analytics:** Aggregate hourly and daily fill patterns to identify peak garbage generation periods in specific metropolitan sectors.
+1. Integration with Real Sensors (ESP32 + Ultrasonic Sensors)
+2. Cloud Deployment using IBM Cloud or AWS
+3. Mobile Notification Support
+4. Multi-City Waste Monitoring
+5. Historical Reporting Dashboard
+6. Smart Collection Vehicle Integration

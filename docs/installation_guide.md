@@ -99,7 +99,7 @@ Before importing the flow, you must install the dashboard, SQLite, and worldmap 
 
 ## Step 5: Import the Node-RED Flow
 
-1. Open the file [waste_flow.json](../node_red/waste_flow.json) in a text editor and copy the entire JSON content.
+1. Open the file [node_red_flow.json](../node_red/node_red_flow.json) in a text editor and copy the entire JSON content.
 2. Go back to Node-RED in your browser (`http://localhost:1880`).
 3. Click the **Menu button** (top-right) -> **Import**.
 4. Paste the copied JSON into the text area.
